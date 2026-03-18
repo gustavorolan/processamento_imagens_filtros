@@ -52,27 +52,45 @@ Baixe e execute diretamente, sem precisar instalar Python:
 
 ---
 
-## Compilar para executável Windows (.exe)
+## Compilar nova versão e publicar no GitHub Releases
 
-Instale o PyInstaller (apenas uma vez):
+### 1. Instalar dependências (apenas uma vez)
 
-```bash
-pip install pyinstaller
-# ou
+```powershell
+py -m pip install -r requirements.txt
 py -m pip install pyinstaller
 ```
 
-Gere o `.exe`:
+### 2. Gerar o `.exe`
 
-```bash
-py -m PyInstaller --onefile --windowed --name "ProcessamentoImagens" --add-data "input;input" main.py
+```powershell
+py -m PyInstaller --onefile --windowed --name "ProcessamentoImagens" --add-data "input;input" --collect-all cv2 --collect-all skimage main.py
 ```
 
-O executável será gerado em `dist\ProcessamentoImagens.exe`.  
-Basta distribuir esse único arquivo — não exige Python instalado na máquina destino.
+O executável será gerado em `dist\ProcessamentoImagens.exe`.
 
-> Para rebuildar após mudanças no código, basta rodar o mesmo comando novamente,  
-> ou usar o `.spec` já gerado: `py -m PyInstaller ProcessamentoImagens.spec`
+### 3. Publicar no GitHub Releases
+
+Instale o [GitHub CLI](https://cli.github.com) e autentique-se (apenas uma vez):
+
+```powershell
+gh auth login
+```
+
+Crie a release e faça o upload do `.exe` (troque `v1.0.0` pela versão desejada):
+
+```powershell
+gh release create v1.0.0 "dist\ProcessamentoImagens.exe" --title "v1.0.0 — Windows Executable" --notes "Descrição das mudanças desta versão."
+```
+
+Para atualizar uma release já existente com um novo `.exe`:
+
+```powershell
+gh release upload v1.0.0 "dist\ProcessamentoImagens.exe" --clobber
+```
+
+> O link de download segue sempre o padrão:  
+> `https://github.com/<usuario>/<repositorio>/releases/download/<versao>/ProcessamentoImagens.exe`
 
 ---
 
