@@ -31,17 +31,40 @@ pip install -r requirements.txt
 
 ---
 
-## Execução
+## Execução com Python
 
 ```bash
 python main.py
 ```
 
-> Se `python` não for reconhecido após instalação, use o caminho direto:
+> Se `python` não for reconhecido, use:
 > ```powershell
-> & "$env:LOCALAPPDATA\Programs\Python\Python312\python.exe" main.py
+> py main.py
 > ```
-> Isso ocorre pois o PATH só é atualizado após reabrir o terminal.
+
+---
+
+## Compilar para executável Windows (.exe)
+
+Instale o PyInstaller (apenas uma vez):
+
+```bash
+pip install pyinstaller
+# ou
+py -m pip install pyinstaller
+```
+
+Gere o `.exe`:
+
+```bash
+py -m PyInstaller --onefile --windowed --name "ProcessamentoImagens" --add-data "input;input" main.py
+```
+
+O executável será gerado em `dist\ProcessamentoImagens.exe`.  
+Basta distribuir esse único arquivo — não exige Python instalado na máquina destino.
+
+> Para rebuildar após mudanças no código, basta rodar o mesmo comando novamente,  
+> ou usar o `.spec` já gerado: `py -m PyInstaller ProcessamentoImagens.spec`
 
 ---
 
