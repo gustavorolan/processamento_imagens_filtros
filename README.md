@@ -44,6 +44,14 @@ python main.py
 
 ---
 
+## Download — Executável Windows (.exe)
+
+Baixe e execute diretamente, sem precisar instalar Python:
+
+**[ProcessamentoImagens.exe — v1.0.0](https://github.com/gustavorolan/processamento_imagens_filtros/releases/download/v1.0.0/ProcessamentoImagens.exe)**
+
+---
+
 ## Compilar para executável Windows (.exe)
 
 Instale o PyInstaller (apenas uma vez):
